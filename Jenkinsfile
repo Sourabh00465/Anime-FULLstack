@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/Sourabh00465/Anime-Cards.git'
+                git branch: 'main', url: 'https://github.com/Sourabh00465/Anime-FULLstack.git'
             }
         }
 
