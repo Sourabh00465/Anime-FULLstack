@@ -1,0 +1,178 @@
+/* Global background */
+body {
+  margin: 0;
+  background: linear-gradient(135deg, #6aaf35, #9c1d56, #ba753c, #25b354);
+  /* Alternative palette:
+     background: linear-gradient(135deg, #2826ae, #927d78, #de83c4, #0c0c0c); */
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+  font-family: Arial, sans-serif;
+  color: #fff;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  75% { background-position: 0% 50%; }
+  100% { background-position: 30% 70%; }
+}
+
+/* Container */
+.container {
+  padding: 20px;
+}
+
+/* Navigation Tabs */
+.tabs {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.tabs button {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  margin: 0 10px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.tabs button:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.tabs button.active {
+  background: #ff4757;
+  color: white;
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+/* Grid Layout */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+/* Anime Card */
+.anime-card {
+  position: relative;
+  height: 300px;
+  border-radius: 10px;
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  transition: transform 0.3s ease;
+}
+
+.anime-card:hover {
+  transform: scale(1.05);
+}
+
+/* Overlay */
+.overlay {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 10px;
+  background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+.overlay h3 {
+  margin: 0 0 10px;
+  font-size: 18px;
+}
+
+.anime-card:hover .overlay {
+  background-color: rgba(0,0,0,0.6);
+}
+
+/* Genre Badges */
+.badge {
+  display: inline-block;
+  background: #ff4757;
+  color: white;
+  padding: 3px 8px;
+  border-radius: 12px;
+  margin: 2px;
+  font-size: 12px;
+}
+
+/* Aura Glow */
+.anime-card.glow {
+  position: relative;
+  box-shadow: 0 0 40px 15px rgba(50, 0, 0, 0.8); /* wine aura base */
+  transition: box-shadow 0.3s ease-in-out;
+  animation: auraPulse 2s infinite alternate;
+}
+
+/* Smoky aura layers */
+.anime-card.glow::before,
+.anime-card.glow::after {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  right: -20px;
+  bottom: -20px;
+  border-radius: 15px;
+  background: radial-gradient(circle, rgba(30,0,0,0.6) 0%, transparent 70%);
+  filter: blur(25px);
+  opacity: 0.6;
+  animation: smokeDrift 6s infinite ease-in-out;
+  z-index: -1;
+}
+
+.anime-card.glow::after {
+  animation-delay: 3s; /* offset second layer for realism */
+}
+
+@keyframes auraPulse {
+  0% { box-shadow: 0 0 20px 8px rgba(50, 0, 0, 0.6); }
+  100% { box-shadow: 0 0 60px 20px rgba(80, 0, 0, 0.9); }
+}
+
+@keyframes smokeDrift {
+  0%   { transform: translate(0,0) scale(1); opacity: 0.6; }
+  50%  { transform: translate(10px,-10px) scale(1.1); opacity: 0.4; }
+  100% { transform: translate(-10px,10px) scale(1); opacity: 0.6; }
+}
+
+/* Modal */
+.modal {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.7);
+  display: flex; justify-content: center; align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: #222;
+  padding: 20px;
+  border-radius: 10px;
+  color: white;
+  max-width: 600px;
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.modal-content p {
+  max-height: 200px;
+  overflow-y: auto;
+  line-height: 1.4;
+}

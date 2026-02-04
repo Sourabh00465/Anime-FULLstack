@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+
+  mysql:
+    image: mysql:8.0
+    container_name: hokage-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: yourpassword
+      MYSQL_DATABASE: anime_db
+      MYSQL_USER: hokage
+      MYSQL_PASSWORD: hokage123 
+    volumes:
+      - mysql_data:/var/lib/mysql 
+
+  backend:
+    build:
+      context: ./hokage
+      dockerfile: Dockerfile
+    container_name: hokage-backend
+    ports:
+      - "8085:8081"
+    depends_on:
+      - mysql
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/anime_db
+      SPRING_DATASOURCE_USERNAME: hokage
+      SPRING_DATASOURCE_PASSWORD: hokage123
+
+  frontend:
+    build:
+      context: ./anime-ui
+      dockerfile: Dockerfile
+    container_name: anime-frontend
+    ports:
+      - "3000:80"
+
+volumes:
+  mysql_data:
