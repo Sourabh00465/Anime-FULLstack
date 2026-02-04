@@ -23,7 +23,7 @@ pipeline {
 
         stage('Build Frontend') {
             steps {
-                dir('anime-frontend') {
+                dir('anime-ui') {
                     bat 'npm install'
                     bat 'npm run build'
                     bat "docker build -t %DOCKER_REPO%/anime-frontend:latest ."
