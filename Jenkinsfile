@@ -44,10 +44,12 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                bat 'docker-compose down --remove-orphans' 
+               bat 'docker-compose down --remove-orphans' 
                 bat 'docker rm -f anime-frontend || true' 
-                bat 'docker rm -f hokage-mysql || true'
-                bat 'docker-compose up -d --force-recreate'
+                bat 'docker rm -f hokage-backend || true' 
+                bat 'docker rm -f hokage-mysql || true' 
+                bat 'docker-compose up -d --force-recreate' 
+                bat 'docker ps'
             }
         }
     }
