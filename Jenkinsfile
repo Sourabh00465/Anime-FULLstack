@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_REPO = 'GokuWNL'
+        DOCKER_REPO = 'gokuwnl'   
     }
 
     stages {
@@ -16,7 +16,7 @@ pipeline {
             steps {
                 dir('hokage') {
                     bat 'mvn clean package -DskipTests'
-                    bat "docker build -t %DOCKER_REPO%/anime-backend:latest ."
+                    bat "docker build -t ${DOCKER_REPO}/anime-backend:latest ."
                 }
             }
         }
@@ -26,16 +26,18 @@ pipeline {
                 dir('anime-ui') {
                     bat 'npm install'
                     bat 'npm run build'
-                    bat "docker build -t %DOCKER_REPO%/anime-frontend:latest ."
+                    bat "docker build -t ${DOCKER_REPO}/anime-frontend:latest ."
                 }
             }
         }
 
         stage('Push Images') {
             steps {
-                withDockerRegistry([credentialsId: 'dockerhub-creds', url: '']) {
-                    bat "docker push %DOCKER_REPO%/anime-backend:latest"
-                    bat "docker push %DOCKER_REPO%/anime-frontend:latest"
+                script {
+                    withDockerRegistry([credentialsId: 'dockerhub-creds', url: 'https://index.docker.io/v1/']) {
+                        bat "docker push ${DOCKER_REPO}/anime-backend:latest"
+                        bat "docker push ${DOCKER_REPO}/anime-frontend:latest"
+                    }
                 }
             }
         }
