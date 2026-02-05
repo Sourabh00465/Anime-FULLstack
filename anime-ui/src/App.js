@@ -109,8 +109,8 @@ function App() {
                 <span className="badge" key={i}>{g}</span>
               ))}
             </div>
-            <button className="active" onClick={() => setSelectedAnime(null)}>
-              Close
+            <button className="close" onClick={() => setSelectedAnime(null)}>
+              &times;
             </button>
           </div>
         </div>
