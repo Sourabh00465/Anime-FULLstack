@@ -2,8 +2,6 @@
 body {
   margin: 0;
   background: linear-gradient(135deg, #6aaf35, #9c1d56, #ba753c, #25b354);
-  /* Alternative palette:
-     background: linear-gradient(135deg, #2826ae, #927d78, #de83c4, #0c0c0c); */
   background-size: 400% 400%;
   animation: gradientShift 15s ease infinite;
   font-family: Arial, sans-serif;
@@ -110,12 +108,11 @@ body {
 /* Aura Glow */
 .anime-card.glow {
   position: relative;
-  box-shadow: 0 0 40px 15px rgba(50, 0, 0, 0.8); /* wine aura base */
+  box-shadow: 0 0 40px 15px rgba(50, 0, 0, 0.8);
   transition: box-shadow 0.3s ease-in-out;
   animation: auraPulse 2s infinite alternate;
 }
 
-/* Smoky aura layers */
 .anime-card.glow::before,
 .anime-card.glow::after {
   content: "";
@@ -133,7 +130,7 @@ body {
 }
 
 .anime-card.glow::after {
-  animation-delay: 3s; /* offset second layer for realism */
+  animation-delay: 3s;
 }
 
 @keyframes auraPulse {
@@ -158,6 +155,7 @@ body {
 }
 
 .modal-content {
+  position: relative; /* important for close button positioning */
   background: #222;
   padding: 20px;
   border-radius: 10px;
@@ -175,4 +173,22 @@ body {
   max-height: 200px;
   overflow-y: auto;
   line-height: 1.4;
+}
+
+/* Close Button */
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 28px;
+  cursor: pointer;
+  color: #fff;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.close:hover {
+  color: #ff4757;
+  transform: scale(1.2);
 }
